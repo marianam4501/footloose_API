@@ -1,7 +1,9 @@
 package com.example.footlooseAPI.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "wish")
@@ -21,7 +23,36 @@ public class WishEntity {
     )
     private List<ProductEntity> wishList;
 
-    @OneToOne
-    @JoinColumn(name = "owner_id", referencedColumnName = "id", nullable = false)
+    @OneToOne // @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
     private UserEntity owner;
+
+    public WishEntity() {
+        this.wishList = new ArrayList<>();
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public List<ProductEntity> getWishList() {
+        return wishList;
+    }
+
+    public void setWishList(List<ProductEntity> wishList) {
+        this.wishList = wishList;
+    }
+
+    public UserEntity getOwner() {
+        return owner;
+    }
+
+    public void setOwner(UserEntity owner) {
+        this.owner = owner;
+    }
 }

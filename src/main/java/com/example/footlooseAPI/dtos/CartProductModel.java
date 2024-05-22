@@ -1,20 +1,28 @@
 package com.example.footlooseAPI.dtos;
 
 public class CartProductModel {
-    public String id;
+    public Integer id;
     public ProductModel product;
-    public UserModel user;
     public int quantity;
     public String size;
+    public Integer cartId;
+
+    public Integer getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(CartModel cart) {
+        this.cartId = cart.getId();
+    }
 
     public CartProductModel() {
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -24,14 +32,6 @@ public class CartProductModel {
 
     public void setProduct(ProductModel product) {
         this.product = product;
-    }
-
-    public UserModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserModel user) {
-        this.user = user;
     }
 
     public int getQuantity() {

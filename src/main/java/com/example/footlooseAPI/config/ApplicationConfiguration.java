@@ -1,6 +1,11 @@
 package com.example.footlooseAPI.config;
 
 import com.example.footlooseAPI.repositories.UserRepository;
+import com.example.footlooseAPI.services.CartService;
+import com.example.footlooseAPI.services.OrderService;
+import com.example.footlooseAPI.services.ProductService;
+import com.example.footlooseAPI.services.WishService;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -43,5 +48,30 @@ public class ApplicationConfiguration {
         authProvider.setPasswordEncoder(passwordEncoder());
 
         return authProvider;
+    }
+
+    @Bean
+    public ModelMapper getModelMapper() {
+        return new ModelMapper();
+    }
+
+    @Bean
+    public CartService cartService(){
+        return new CartService();
+    }
+
+    @Bean
+    public OrderService orderService(){
+        return new OrderService();
+    }
+
+    @Bean
+    public ProductService productService(){
+        return new ProductService();
+    }
+
+    @Bean
+    public WishService wishService(){
+        return new WishService();
     }
 }

@@ -1,68 +1,35 @@
-package com.example.footlooseAPI.entities;
-
-import jakarta.persistence.*;
+package com.example.footlooseAPI.dtos;
 
 import java.util.List;
 
-@Table(name = "orders")
-@Entity
-public class OrderEntity {
+public class OrderModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
     private Integer id;
-
-    @OneToOne
-    @JoinColumn(name = "owner_id", referencedColumnName = "id", nullable = false)
-    private UserEntity owner;
-
-//    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<CartProductEntity> products;
-
-    @Column(nullable = false)
+    private UserModel owner;
+    //private List<CartProductModel> products;
     private Double subtotal;
-
-    @Column(nullable = false)
     private Double taxes;
-
-    @Column(nullable = false)
     private Double total;
+    private String status;
 
     // Shipping Information
-    @Column(nullable = false)
     private String address;
-
-    @Column
     private String address2;
-
-    @Column(nullable = false)
     private String city;
-
-    @Column(nullable = false)
     private String province;
-
-    @Column(nullable = false)
     private String zipCode;
 
     // Credit Card Information
-    @Column(nullable = false)
     private String cardNumber;
-
-    @Column(nullable = false)
     private String cardName;
-
-    @Column(nullable = false)
     private String expiryDate;
-
-    @Column(nullable = false)
     private String cvv;
 
-    @Column
-    private String status;
 
-    public OrderEntity() {
+    public OrderModel() {
     }
+
+    // Getters and Setters
 
     public Integer getId() {
         return id;
@@ -72,19 +39,19 @@ public class OrderEntity {
         this.id = id;
     }
 
-    public UserEntity getOwner() {
+    public UserModel getOwner() {
         return owner;
     }
 
-    public void setOwner(UserEntity owner) {
+    public void setOwner(UserModel owner) {
         this.owner = owner;
     }
 
-//    public List<CartProductEntity> getProducts() {
+//    public List<CartProductModel> getProducts() {
 //        return products;
 //    }
-//
-//    public void setProducts(List<CartProductEntity> products) {
+
+//    public void setProducts(List<CartProductModel> products) {
 //        this.products = products;
 //    }
 
@@ -94,8 +61,6 @@ public class OrderEntity {
 
     public void setSubtotal(Double subtotal) {
         this.subtotal = subtotal;
-        this.taxes = this.subtotal * 0.13;
-        this.total = this.subtotal - this.taxes;
     }
 
     public Double getTaxes() {
@@ -104,7 +69,6 @@ public class OrderEntity {
 
     public void setTaxes(Double taxes) {
         this.taxes = taxes;
-        this.total = this.subtotal - this.taxes;
     }
 
     public Double getTotal() {

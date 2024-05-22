@@ -3,6 +3,7 @@ package com.example.footlooseAPI.entities;
 import jakarta.persistence.*;
 
 import java.util.List;
+
 @Table(name = "product")
 @Entity
 public class ProductEntity {
@@ -19,7 +20,7 @@ public class ProductEntity {
     public String description;
 
     @Column(nullable = false)
-    public Long price;
+    public Double price;
 
     @Column(nullable = false)
     public String image;
@@ -27,16 +28,18 @@ public class ProductEntity {
     @Column(nullable = false)
     public String brand;
 
-    @ElementCollection
-    @CollectionTable(name = "product_sizes", joinColumns = @JoinColumn(name = "product_id"))
-    @Column(name = "size", nullable = false)
-    private List<String> sizes;
+
+    @Column(nullable = false)
+    private String sizes;
 
     @Column(nullable = false)
     public String category;
 
     @Column
     public Integer stock;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CartProductEntity> cartProducts;
 
     public ProductEntity() {
     }
@@ -65,11 +68,11 @@ public class ProductEntity {
         this.description = description;
     }
 
-    public Long getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -89,12 +92,16 @@ public class ProductEntity {
         this.brand = brand;
     }
 
-    public List<String> getSizes() {
+    public String getSizes() {
         return sizes;
     }
 
+//    public void setSizes(String sizes) {
+//        this.sizes = sizes;
+//    }
+
     public void setSizes(List<String> sizes) {
-        this.sizes = sizes;
+        this.sizes = String.join(",", sizes);
     }
 
     public String getCategory() {

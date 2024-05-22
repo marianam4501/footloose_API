@@ -9,4 +9,6 @@ import java.util.Optional;
 @Repository
 public interface CartRepository extends CrudRepository<CartEntity, Integer> {
     //Optional<ProductEntity> findByEmail(String email);
+
+    CartEntity findByOwnerId(Integer id);
 }

@@ -37,6 +37,13 @@ public class SecurityConfiguration {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeRequests(authorize -> authorize
                         .requestMatchers(new AntPathRequestMatcher("/auth/**", "POST")).permitAll() // Allow POST requests to /user without authentication
+                        .requestMatchers(new AntPathRequestMatcher("/product", "GET")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/product/featured", "GET")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/product/{id}", "GET")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/product/add", "POST")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/product/delete", "DELETE")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/product/edit", "PUT")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/admin", "POST")).hasRole("SUPER_ADMIN")
                         .anyRequest().authenticated() // Ensures all requests are authenticated.
                 )
                 .logout((logout) -> logout.logoutUrl("/auth/logout"))

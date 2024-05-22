@@ -7,6 +7,8 @@ import com.example.footlooseAPI.entities.UserEntity;
 import com.example.footlooseAPI.dtos.UserModel;
 import com.example.footlooseAPI.repositories.RoleRepository;
 import com.example.footlooseAPI.repositories.UserRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,10 @@ import java.util.Optional;
 
 @Service
 public class UserService {
+
+    @Autowired
+    private ModelMapper modelMapper;
+
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;

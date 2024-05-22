@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProductModel {
+public class AddProductDto {
     public Integer id;
     public String name;
     public String description;
@@ -15,7 +15,7 @@ public class ProductModel {
     public String category;
     public Integer stock;
 
-    public ProductModel() {
+    public AddProductDto() {
         //this.sizes = new ArrayList<>();
     }
 
@@ -69,16 +69,6 @@ public class ProductModel {
 
     public List<String> getSizes() {
         return sizes;
-    }
-
-    public void setSizes(String sizes) {
-        if (sizes != null && !sizes.isEmpty()) {
-            this.sizes = Arrays.stream(sizes.split(","))
-                    .map(String::trim)
-                    .collect(Collectors.toList());
-        } else {
-            this.sizes = null; // or new ArrayList<>() if you prefer an empty list instead of null
-        }
     }
 
     public void setSizes(List<String> sizes){

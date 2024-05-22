@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class CartProductEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer id;
 
@@ -24,10 +24,6 @@ public class CartProductEntity {
 
     @Column(nullable = false)
     private String size;
-
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private OrderEntity order;
 
     public Integer getId() {
         return id;
@@ -68,4 +64,12 @@ public class CartProductEntity {
     public void setSize(String size) {
         this.size = size;
     }
+
+//    public OrderEntity getOrder() {
+//        return order;
+//    }
+//
+//    public void setOrder(OrderEntity order) {
+//        this.order = order;
+//    }
 }
