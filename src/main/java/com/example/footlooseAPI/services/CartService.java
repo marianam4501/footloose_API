@@ -92,7 +92,7 @@ public class CartService {
         }
     }
 
-    public CartProductModel increaseQuantity(CartProductModel product) {
+    public CartModel increaseQuantity(CartProductModel product) {
         Optional<CartProductEntity> cartProduct = this.cartProductRepository.findById(product.getId());
 
         if(cartProduct.isPresent()){
@@ -100,13 +100,14 @@ public class CartService {
             int quantity = cartProduct.get().getQuantity();
             cartProduct.get().setQuantity(quantity + 1);
             cart.recalculateCartTotals();
-            this.cartRepository.save(cart);
-            return this.modelMapper.map(this.cartProductRepository.save(cartProduct.get()),CartProductModel.class);
+            cart = this.cartRepository.save(cart);
+            this.cartProductRepository.save(cartProduct.get());
+            return this.modelMapper.map(cart, CartModel.class);
         }
         return null;
     }
 
-    public CartProductModel decreaseQuantity(CartProductModel product) {
+    public CartModel decreaseQuantity(CartProductModel product) {
         Optional<CartProductEntity> cartProduct = this.cartProductRepository.findById(product.getId());
         if(cartProduct.isPresent()){
             CartEntity cart = cartProduct.get().getCart();
@@ -115,13 +116,13 @@ public class CartService {
                 cartProduct.get().setQuantity(quantity - 1);
                 cartProduct = Optional.of(this.cartProductRepository.save(cartProduct.get()));
                 cart.recalculateCartTotals();
-                this.cartRepository.save(cart);
-                return this.modelMapper.map(cartProduct.get(),CartProductModel.class);
+                cart = this.cartRepository.save(cart);
+                return this.modelMapper.map(cart,CartModel.class);
             } else {
                 this.cartProductRepository.deleteById(cartProduct.get().getId());
                 cart.recalculateCartTotals();
-                this.cartRepository.save(cart);
-                return null;
+                cart = this.cartRepository.save(cart);
+                return this.modelMapper.map(cart,CartModel.class);
             }
 
         }

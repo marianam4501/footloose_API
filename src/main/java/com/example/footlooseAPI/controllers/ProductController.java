@@ -23,7 +23,7 @@ public class ProductController {
     // /product/featured
     @GetMapping("/featured")
     public List<ProductModel> getFeaturedProducts(){
-        return this.productService.getFeaturedProducts(5);
+        return this.productService.getFeaturedProducts(10);
     }
 
     @GetMapping("/{id}")
@@ -49,7 +49,7 @@ public class ProductController {
         return this.productService.deleteProduct(id);
     }
 
-    @PutMapping("edit")
+    @PutMapping("/edit")
     @PreAuthorize("hasRole('ADMIN')")
     public ProductModel editProduct(@RequestBody ProductModel product){
         return this.productService.editProduct(product);

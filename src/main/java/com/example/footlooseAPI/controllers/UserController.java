@@ -1,8 +1,11 @@
 package com.example.footlooseAPI.controllers;
 
 import com.example.footlooseAPI.dtos.RegisterUserDto;
+import com.example.footlooseAPI.dtos.UserModel;
 import com.example.footlooseAPI.entities.UserEntity;
 import com.example.footlooseAPI.services.UserService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,17 +18,20 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping("/me")
-    public ResponseEntity<UserEntity> authenticatedUser() {
+    public ResponseEntity<UserModel> authenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         UserEntity currentUser = (UserEntity) authentication.getPrincipal();
 
-        return ResponseEntity.ok(currentUser);
+        return ResponseEntity.ok(this.modelMapper.map(currentUser, UserModel.class));
     }
 
     @GetMapping

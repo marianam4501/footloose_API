@@ -48,13 +48,13 @@ public class CartController {
 
     @PutMapping("/increaseQuantity")
     @PreAuthorize("hasRole('USER')")
-    public CartProductModel increaseQuantity(@RequestBody CartProductModel product){
+    public CartModel increaseQuantity(@RequestBody CartProductModel product){
         return this.cartService.increaseQuantity(product);
     }
 
     @PutMapping("/decreaseQuantity")
     @PreAuthorize("hasRole('USER')")
-    public CartProductModel decreaseQuantity(@RequestBody CartProductModel product){
+    public CartModel decreaseQuantity(@RequestBody CartProductModel product){
         return this.cartService.decreaseQuantity(product);
     }
 

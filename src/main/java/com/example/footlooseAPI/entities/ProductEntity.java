@@ -96,13 +96,13 @@ public class ProductEntity {
         return sizes;
     }
 
-//    public void setSizes(String sizes) {
-//        this.sizes = sizes;
-//    }
-
-    public void setSizes(List<String> sizes) {
-        this.sizes = String.join(",", sizes);
+    public void setSizes(String sizes) {
+        this.sizes = sizes;
     }
+
+   // public void setSizes(List<String> sizes) {
+//        this.sizes = String.join(",", sizes);
+//    }
 
     public String getCategory() {
         return category;

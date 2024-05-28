@@ -1,17 +1,8 @@
 package com.example.footlooseAPI.dtos;
 
-import java.util.Date;
-import java.util.List;
-
-public class OrderModel {
-
+public class CreateOrderDto {
     private Integer id;
-    private Integer owner;
-    private List<CartProductModel> products;
-    private Double subtotal;
-    private Double taxes;
-    private Double total;
-    private String status;
+    private Integer ownerId;
 
     // Shipping Information
     private String address;
@@ -26,15 +17,6 @@ public class OrderModel {
     private String expiryDate;
     private String cvv;
 
-    private String orderStatus;
-    private Date createdAt;
-
-
-    public OrderModel() {
-    }
-
-    // Getters and Setters
-
     public Integer getId() {
         return id;
     }
@@ -43,44 +25,12 @@ public class OrderModel {
         this.id = id;
     }
 
-    public Integer getOwner() {
-        return owner;
+    public Integer getOwnerId() {
+        return ownerId;
     }
 
-    public void setOwner(UserModel owner) {
-        this.owner = owner.getId();
-    }
-
-    public List<CartProductModel> getProducts() {
-        return products;
-    }
-
-    public void setProducts(List<CartProductModel> products) {
-        this.products = products;
-    }
-
-    public Double getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(Double subtotal) {
-        this.subtotal = subtotal;
-    }
-
-    public Double getTaxes() {
-        return taxes;
-    }
-
-    public void setTaxes(Double taxes) {
-        this.taxes = taxes;
-    }
-
-    public Double getTotal() {
-        return total;
-    }
-
-    public void setTotal(Double total) {
-        this.total = total;
+    public void setOwnerId(Integer ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getAddress() {
@@ -154,30 +104,4 @@ public class OrderModel {
     public void setCvv(String cvv) {
         this.cvv = cvv;
     }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-
 }

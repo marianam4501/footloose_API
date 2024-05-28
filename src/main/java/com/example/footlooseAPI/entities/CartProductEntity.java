@@ -12,12 +12,16 @@ public class CartProductEntity {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "cart_id", nullable = false)
+    @JoinColumn(name = "cart_id")
     private CartEntity cart;
 
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "product_id", referencedColumnName = "id", nullable = false)
     private ProductEntity product;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private OrderEntity order;
 
     @Column(nullable = false)
     private Integer quantity;
@@ -65,11 +69,11 @@ public class CartProductEntity {
         this.size = size;
     }
 
-//    public OrderEntity getOrder() {
-//        return order;
-//    }
-//
-//    public void setOrder(OrderEntity order) {
-//        this.order = order;
-//    }
+    public OrderEntity getOrder() {
+        return order;
+    }
+
+    public void setOrder(OrderEntity order) {
+        this.order = order;
+    }
 }

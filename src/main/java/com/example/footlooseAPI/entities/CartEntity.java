@@ -23,7 +23,7 @@ public class CartEntity {
     @JsonBackReference
     private UserEntity owner;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.REFRESH, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 //    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<CartProductEntity> products;
 

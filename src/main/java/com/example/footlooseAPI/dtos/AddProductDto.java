@@ -11,7 +11,7 @@ public class AddProductDto {
     public Double price;
     public String image;
     public String brand;
-    public List<String> sizes;
+    public String sizes;
     public String category;
     public Integer stock;
 
@@ -67,11 +67,11 @@ public class AddProductDto {
         this.brand = brand;
     }
 
-    public List<String> getSizes() {
+    public String getSizes() {
         return sizes;
     }
 
-    public void setSizes(List<String> sizes){
+    public void setSizes(String sizes){
         this.sizes = sizes;
     }
 

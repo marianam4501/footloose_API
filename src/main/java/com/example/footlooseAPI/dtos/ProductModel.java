@@ -11,7 +11,7 @@ public class ProductModel {
     public Double price;
     public String image;
     public String brand;
-    public List<String> sizes;
+    public String sizes;
     public String category;
     public Integer stock;
 
@@ -67,21 +67,18 @@ public class ProductModel {
         this.brand = brand;
     }
 
-    public List<String> getSizes() {
+    public String getSizes() {
         return sizes;
     }
 
     public void setSizes(String sizes) {
-        if (sizes != null && !sizes.isEmpty()) {
-            this.sizes = Arrays.stream(sizes.split(","))
-                    .map(String::trim)
-                    .collect(Collectors.toList());
-        } else {
-            this.sizes = null; // or new ArrayList<>() if you prefer an empty list instead of null
-        }
-    }
-
-    public void setSizes(List<String> sizes){
+//        if (sizes != null && !sizes.isEmpty()) {
+//            this.sizes = Arrays.stream(sizes.split(","))
+//                    .map(String::trim)
+//                    .collect(Collectors.toList());
+//        } else {
+//            this.sizes = null; // or new ArrayList<>() if you prefer an empty list instead of null
+//        }
         this.sizes = sizes;
     }
 

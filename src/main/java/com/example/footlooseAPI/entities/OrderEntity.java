@@ -1,7 +1,9 @@
 package com.example.footlooseAPI.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.Date;
 import java.util.List;
 
 @Table(name = "orders")
@@ -13,12 +15,13 @@ public class OrderEntity {
     @Column(nullable = false)
     private Integer id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "owner_id", referencedColumnName = "id", nullable = false)
     private UserEntity owner;
 
-//    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<CartProductEntity> products;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<CartProductEntity> products;
 
     @Column(nullable = false)
     private Double subtotal;
@@ -59,7 +62,11 @@ public class OrderEntity {
     private String cvv;
 
     @Column
-    private String status;
+    private String orderStatus;
+
+    @CreationTimestamp
+    @Column(updatable = false, name = "created_at")
+    private Date createdAt;
 
     public OrderEntity() {
     }
@@ -80,13 +87,13 @@ public class OrderEntity {
         this.owner = owner;
     }
 
-//    public List<CartProductEntity> getProducts() {
-//        return products;
-//    }
-//
-//    public void setProducts(List<CartProductEntity> products) {
-//        this.products = products;
-//    }
+    public List<CartProductEntity> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<CartProductEntity> products) {
+        this.products = products;
+    }
 
     public Double getSubtotal() {
         return subtotal;
@@ -188,10 +195,26 @@ public class OrderEntity {
     }
 
     public String getStatus() {
-        return status;
+        return orderStatus;
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        this.orderStatus = status;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }
